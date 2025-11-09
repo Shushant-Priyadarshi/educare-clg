@@ -14,7 +14,7 @@ const Header = () => {
             className="text-2xl font-bold text-foreground"
             whileHover={{ scale: 1.05 }}
           >
-            Modules 👋
+            EduCareer Companion
           </motion.h1>
         </Link>
         
