@@ -3,8 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
+import StudyResourceFinder from "./pages/StudyResourceFinder";
+import ResumeHub from "./pages/ResumeHub";
+import JobCareerRecommender from "./pages/JobCareerRecommender";
+import AIChatbot from "./pages/AIChatbot";
 import NotFound from "./pages/NotFound";
+import Header from "./components/layout/Header";
 
 const queryClient = new QueryClient();
 
@@ -14,9 +19,13 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<Home />} />
+          <Route path="/study" element={<StudyResourceFinder />} />
+          <Route path="/resume" element={<ResumeHub />} />
+          <Route path="/career" element={<JobCareerRecommender />} />
+          <Route path="/chatbot" element={<AIChatbot />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
