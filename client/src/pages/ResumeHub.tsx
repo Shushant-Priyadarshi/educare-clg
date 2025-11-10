@@ -38,17 +38,28 @@ const ResumeHub = () => {
 
   // Create resume
   const handleCreate = async () => {
-    setLoading(true);
-    try {
-      const res = await createResume(resumeData);
-      setGeneratedResume(res.resume || "Error generating resume");
-    } catch (err) {
-      console.error(err);
-      alert("Error generating resume.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Check for empty fields
+  const emptyFields = Object.entries(resumeData)
+    .filter(([_, value]) => !value.trim())
+    .map(([key]) => key);
+
+  if (emptyFields.length > 0) {
+    alert(`Please fill in all fields before generating your resume.`);
+    return;
+  }
+
+  setLoading(true);
+  try {
+    const res = await createResume(resumeData);
+    setGeneratedResume(res.resume || "Error generating resume");
+  } catch (err) {
+    console.error(err);
+    alert("Error generating resume.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // Analyze resume upload
   const handleFileUpload = async (e) => {
@@ -135,6 +146,7 @@ const ResumeHub = () => {
                     rows={field === "summary" ? 2 : 1}
                     placeholder={`Enter your ${field}`}
                     onChange={handleChange}
+                    required
                     className="w-full p-2 rounded border bg-background text-sm"
                   />
                 ))}

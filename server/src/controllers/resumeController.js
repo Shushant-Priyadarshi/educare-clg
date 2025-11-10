@@ -58,9 +58,12 @@ export const createResume = async (req, res) => {
 
     const prompt = `
 You are a professional resume builder AI.
-Generate a clean, ATS-optimized resume in well-formatted HTML (not markdown). 
+Generate a clean, ATS-optimized resume in well-formatted HTML (not markdown).
 Make it look modern and structured like a premium resume template.
 Use clear sections with subtle styling and spacing.
+Try to put them all in a single page of pdf, if links provided give them proper clicks to go that links.
+dont use too much colors just black that will look more professional.
+Use the overleaf jake's resume as inspiration.
 
 Input:
 Name: ${name}
