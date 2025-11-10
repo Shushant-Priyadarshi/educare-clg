@@ -5,7 +5,7 @@ export const BASE_URL = `${import.meta.env.VITE_BASE_URL}/resume`;
 
 
 // CREATE RESUME
-export const createResume = async (data:string) => {
+export const createResume = async (data:unknown) => {
   const res = await axios.post(`${BASE_URL}/create`, data, {
     headers: { "Content-Type": "application/json" },
   });

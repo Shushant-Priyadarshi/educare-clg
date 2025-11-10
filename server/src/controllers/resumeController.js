@@ -42,32 +42,49 @@ Format in JSON.
   }
 };
 
-
 export const createResume = async (req, res) => {
   try {
-    const { name, role, experience, skills } = req.body;
+    const {
+      name,
+      role,
+      email,
+      linkedin,
+      experience,
+      projects,
+      education,
+      achievements,
+      skills,
+    } = req.body;
 
     const prompt = `
-You are an expert resume writer. Generate a professional, ATS-friendly resume in Markdown format using the following details:
-- Name: ${name}
-- Role: ${role}
-- Experience: ${experience}
-- Skills: ${skills}
+You are a professional resume builder AI.
+Generate a clean, ATS-optimized resume in well-formatted HTML (not markdown). 
+Make it look modern and structured like a premium resume template.
+Use clear sections with subtle styling and spacing.
 
-Return only the formatted resume text, not JSON or explanations.
+Input:
+Name: ${name}
+Role: ${role}
+Email: ${email}
+LinkedIn: ${linkedin}
+Experience: ${experience}
+Projects: ${projects}
+Education: ${education}
+Achievements: ${achievements}
+Skills: ${skills}
+
+generate a summary (1-2 line from the info) and put it in the resume
+Return only the formatted HTML inside a <div> (no <html>, <head>, <body>).
 `;
 
     const response = await askGemini(prompt);
-
-    // Clean and ensure text format
     const cleaned = response
-      .replace(/```(json|markdown|md)?/gi, "")
+      .replace(/```(html)?/gi, "")
       .replace(/```/g, "")
       .trim();
 
     res.status(200).json({ resume: cleaned });
   } catch (err) {
-    console.error("❌ Error creating resume:", err);
     res.status(500).json({ error: err.message });
   }
 };
