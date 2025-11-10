@@ -79,7 +79,7 @@ const Home = () => {
           </p>
           
           {/* Stats Section */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -97,7 +97,7 @@ const Home = () => {
               <div className="text-3xl md:text-4xl font-bold text-primary mb-1">24/7</div>
               <div className="text-sm text-muted-foreground">Available Support</div>
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
 
         {/* Modules Grid */}
