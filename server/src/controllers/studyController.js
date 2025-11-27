@@ -14,9 +14,9 @@ You are an AI that finds REAL online study resources using web search. Do NOT ha
 Topic: "${topic}"
 
 Return EXACTLY:
-- 2 real articles (roadmaps, official docs, guides, tutorials)
-- 2 real PDFs or official documentation links
-- 2 real YouTube videos that genuinely exist
+- 5 real articles (roadmaps, official docs, guides, tutorials)
+- 5 real PDFs or official documentation links
+- 5 real YouTube videos that genuinely exist
 - A short structured learning path of 3–5 steps only (no long paragraphs)
 
 Return strictly valid JSON:
@@ -69,9 +69,7 @@ Rules:
       console.error("❌ JSON Parse Error, returning raw text:", err.message);
       return res.status(200).json({ topic, rawText: cleaned });
     }
-    console.log('====================================');
-    console.log(parsed);
-    console.log('====================================');
+
     return res.json({
       topic,
       ...parsed,
