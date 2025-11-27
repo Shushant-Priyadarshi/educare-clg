@@ -134,7 +134,7 @@ const StudyResourceFinder = () => {
               </CardContent>
             </Card>
 
-            {/* Videos */}
+             {/* Videos */}
             <Card className="bg-white/10 text-white border-white/20 backdrop-blur-lg">
               <CardHeader>
                 <div className="flex items-center gap-3">
@@ -194,6 +194,7 @@ const StudyResourceFinder = () => {
               </CardContent>
             </Card>
 
+           
 
             {/* PDFs */}
             <Card className="bg-white/10 text-white border-white/20 backdrop-blur-lg">

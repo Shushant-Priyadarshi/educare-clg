@@ -24,7 +24,7 @@ const verifyJWT = async(req,res,next) =>{
     req.user = userFromDB
     next()
    } catch (error) {
-        console.error("JWT verification error:", error);
+        
         res.status(400).json({ message: "Unauthorised request" });
    }
 }

@@ -18,6 +18,9 @@ const JobCareerRecommender = () => {
     setLoading(true);
     setLearningData(null); // reset learning data
     try {
+      if(skills.trim() == ""){
+        return
+      }
       const res = await recommendCareer(skills);
       setCareerData(res.data || res);
     } catch (err) {
@@ -51,7 +54,7 @@ const JobCareerRecommender = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-3 mb-4">
+          <div className="inline-flex items-center gap-3 mb-4 ">
             <Briefcase className="w-12 h-12 text-primary text-yellow-300" />
             <h1 className="text-4xl md:text-5xl font-bold text-foreground text-yellow-300">
               Job & Career Recommender
@@ -63,7 +66,7 @@ const JobCareerRecommender = () => {
         </motion.div>
 
         {/* Input */}
-        <Card className="bg-card/50 backdrop-blur-sm border-border/50 max-w-2xl mx-auto mb-8">
+        <Card className="bg-white/10 backdrop-blur-sm border-border/50 max-w-2xl mx-auto mb-8">
           <CardContent className="pt-6 space-y-4">
             <input
               type="text"

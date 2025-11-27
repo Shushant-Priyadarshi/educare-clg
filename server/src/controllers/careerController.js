@@ -16,20 +16,20 @@ The JSON should strictly follow this structure:
     "string (top 5 job titles that match the skills)"
   ],
   "missing_skills": [
-    "string (skills the user should learn to improve career opportunities)"
+    "string (top 5 skills the user should learn to improve career opportunities)"
   ],
   "job_portal_links": [
     {
       "name": "string (portal name, e.g. 'LinkedIn Jobs')",
-      "url": "string (must be a valid working link, e.g. 'https://www.linkedin.com/jobs')"
+      "url": "string (must be a valid working link)"
     }
   ]
 }
 
 Rules:
 - Include exactly 5 job_titles.
-- Include at least 5-10 missing_skills.
-- Include 5-7 job_portal_links (mix of general and domain-specific).
+- Include at least 5 missing_skills.
+- Include 5 job_portal_links (mix of general and domain-specific).
 - DO NOT include markdown, code blocks, or extra text.
 Output must start with { and end with }.
 `;

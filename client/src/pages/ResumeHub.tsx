@@ -19,7 +19,6 @@ const ResumeHub = () => {
     role: "",
     email: "",
     linkedin: "",
-    summary: "",
     experience: "",
     projects: "",
     education: "",
@@ -31,44 +30,43 @@ const ResumeHub = () => {
   const [generatedResume, setGeneratedResume] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Handle input for resume creation
-  const handleChange = (e) => {
+  // Handle form changes
+  const handleChange = (e: any) => {
     setResumeData({ ...resumeData, [e.target.name]: e.target.value });
   };
 
-  // Create resume
+  // Generate Resume
   const handleCreate = async () => {
-  // Check for empty fields
-  const emptyFields = Object.entries(resumeData)
-    .filter(([_, value]) => !value.trim())
-    .map(([key]) => key);
+    const emptyFields = Object.entries(resumeData)
+      .filter(([_, value]) => !value.trim())
+      .map(([key]) => key);
 
-  if (emptyFields.length > 0) {
-    alert(`Please fill in all fields before generating your resume.`);
-    return;
-  }
+    if (emptyFields.length > 0) {
+      alert("Please fill in all fields before generating your resume.");
+      return;
+    }
 
-  setLoading(true);
-  try {
-    const res = await createResume(resumeData);
-    setGeneratedResume(res.resume || "Error generating resume");
-  } catch (err) {
-    console.error(err);
-    alert("Error generating resume.");
-  } finally {
-    setLoading(false);
-  }
-};
+    setLoading(true);
+    try {
+      const res = await createResume(resumeData);
+      setGeneratedResume(res.resume || "Error generating resume");
+    } catch (err) {
+      console.error(err);
+      alert("Error generating resume.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-
-  // Analyze resume upload
-  const handleFileUpload = async (e) => {
+  // Analyze Resume Upload
+  const handleFileUpload = async (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
+
     setLoading(true);
     try {
       const res = await analyzeResume(file);
-      setAnalyzeResult(res || { error: "Failed to analyze resume" });
+      setAnalyzeResult(res?.data || null);
     } catch (err) {
       console.error(err);
       alert("Error analyzing resume.");
@@ -77,7 +75,7 @@ const ResumeHub = () => {
     }
   };
 
-  // Download as PDF
+  // Download PDF
   const handleDownload = () => {
     const element = document.getElementById("resume-preview");
     const opt = {
@@ -102,28 +100,29 @@ const ResumeHub = () => {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-3 mb-4">
-            <FileText className="w-12 h-12 text-primary text-yellow-300" />
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground text-yellow-300">
+            <FileText className="w-12 h-12 text-yellow-300" />
+            <h1 className="text-4xl md:text-5xl font-bold text-yellow-300">
               Resume Hub
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-white/70">
             Build, analyze, and download your professional resume
           </p>
         </motion.div>
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          
           {/* CREATE RESUME */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full">
+            <Card className="bg-white/10 text-white border-white/20 backdrop-blur-md h-full">
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
-                  <FileText className="w-6 h-6 text-primary" />
+                  <FileText className="w-6 h-6 text-yellow-300" />
                   Create Resume
                 </CardTitle>
               </CardHeader>
@@ -143,27 +142,27 @@ const ResumeHub = () => {
                   <textarea
                     key={field}
                     name={field}
-                    rows={field === "summary" ? 2 : 1}
                     placeholder={`Enter your ${field}`}
+                    rows={field === "experience" ? 3 : 1}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 rounded border bg-background text-sm"
+                    className="w-full p-2 rounded border bg-white/5 border-white/30 text-sm"
                   />
                 ))}
 
                 <Button
                   onClick={handleCreate}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="w-full bg-yellow-300 text-black hover:bg-yellow-400"
                   disabled={loading}
                 >
-                  {loading ? "Creating..." : "Generate Resume"}
+                  {loading ? "Generating..." : "Generate Resume"}
                 </Button>
 
                 {generatedResume && (
-                  <div className="mt-4 bg-muted p-3 rounded overflow-auto max-h-96 text-sm">
+                  <div className="mt-4 bg-white text-black p-3 rounded shadow max-h-96 overflow-auto">
                     <div
                       id="resume-preview"
-                      className="p-4 bg-white text-gray-800 rounded shadow-sm"
+                      className="p-4 bg-white text-gray-900 rounded"
                       dangerouslySetInnerHTML={{ __html: generatedResume }}
                     />
 
@@ -185,20 +184,18 @@ const ResumeHub = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <Card className="bg-card/50 backdrop-blur-sm border-border/50 h-full">
+            <Card className="bg-white/10 text-white border-white/20 backdrop-blur-md h-full">
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
-                  <Upload className="w-6 h-6 text-primary" />
+                  <Upload className="w-6 h-6 text-yellow-300" />
                   Analyze Resume
                 </CardTitle>
               </CardHeader>
 
               <CardContent className="space-y-4 text-center">
-                <label className="border-2 border-dashed border-border/50 rounded-lg p-8 hover:border-primary/50 transition-colors cursor-pointer block">
-                  <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-                  <p className="text-sm text-muted-foreground">
-                    Click to upload or drag and drop
-                  </p>
+                <label className="border-2 border-dashed border-white/40 rounded-lg p-8 hover:border-yellow-300 transition cursor-pointer block">
+                  <Upload className="w-12 h-12 text-white/70 mx-auto mb-3" />
+                  <p className="text-sm text-white/70">Click to upload or drag and drop</p>
                   <input
                     type="file"
                     accept=".pdf,.doc,.docx"
@@ -207,31 +204,26 @@ const ResumeHub = () => {
                   />
                 </label>
 
-                {loading && <p className="text-primary">Analyzing...</p>}
+                {loading && <p className="text-yellow-300">Analyzing...</p>}
 
+                {/* Analysis Result */}
                 {analyzeResult && (
-                  <div className="mt-4 text-left bg-muted p-4 rounded max-h-96 overflow-auto space-y-4">
-                    <h3 className="text-lg font-semibold mb-2">
-                      Resume Analysis
-                    </h3>
+                  <div className="mt-4 text-left bg-white/10 p-4 rounded max-h-96 overflow-auto space-y-4 border border-white/20">
+                    <h3 className="text-lg font-semibold">Resume Analysis</h3>
 
                     <p>
-                      <strong>Score:</strong>{" "}
-                      {analyzeResult.data?.resume_score || "N/A"} / 10
+                      <strong>Score:</strong> {analyzeResult.score || "N/A"} / 10
                     </p>
 
                     {["strengths", "weaknesses", "suggested_improvements", "missing_key_skills"].map(
                       (section, idx) => (
                         <div key={idx}>
-                          <strong>
-                            {section
-                              .replaceAll("_", " ")
-                              .replace(/\b\w/g, (c) => c.toUpperCase())}
-                            :
+                          <strong className="capitalize">
+                            {section.replace(/_/g, " ")}:
                           </strong>
                           <ul className="list-disc ml-5 text-sm">
-                            {analyzeResult.data?.[section]?.map((s, i) => (
-                              <li key={i}>{s}</li>
+                            {analyzeResult[section]?.map((item: any, i: number) => (
+                              <li key={i}>{item}</li>
                             ))}
                           </ul>
                         </div>
@@ -244,43 +236,42 @@ const ResumeHub = () => {
           </motion.div>
         </div>
 
-        {/* AI Insights Section */}
+        {/* AI Insights */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
           className="max-w-6xl mx-auto mt-8"
         >
-          <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+          <Card className="bg-white/10 text-white border-white/20 backdrop-blur-md">
             <CardHeader>
               <CardTitle className="text-2xl flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
+                <Sparkles className="w-6 h-6 text-yellow-300" />
                 AI-Powered Insights
               </CardTitle>
             </CardHeader>
+
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   {
                     title: "Score & Feedback",
-                    desc: "Get detailed scoring and actionable feedback",
+                    desc: "Get detailed scoring and actionable feedback.",
                   },
                   {
                     title: "Missing Skills",
-                    desc: "Identify skills you should add to stand out",
+                    desc: "Identify skills you should add to stand out.",
                   },
                   {
                     title: "Improvements",
-                    desc: "Get suggestions to enhance your resume",
+                    desc: "Suggestions to improve your resume quickly.",
                   },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <Star className="w-5 h-5 text-primary mt-1" />
+                    <Star className="w-5 h-5 text-yellow-300 mt-1" />
                     <div>
-                      <h4 className="font-semibold mb-1">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground">
-                        {item.desc}
-                      </p>
+                      <h4 className="font-semibold">{item.title}</h4>
+                      <p className="text-sm text-white/70">{item.desc}</p>
                     </div>
                   </div>
                 ))}

@@ -69,7 +69,9 @@ Rules:
       console.error("❌ JSON Parse Error, returning raw text:", err.message);
       return res.status(200).json({ topic, rawText: cleaned });
     }
-
+    console.log('====================================');
+    console.log(parsed);
+    console.log('====================================');
     return res.json({
       topic,
       ...parsed,

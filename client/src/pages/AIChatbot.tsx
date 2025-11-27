@@ -38,6 +38,7 @@ How can I assist you today?`,
       const res = await fetch("http://localhost:9090/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ message: input }),
       });
 

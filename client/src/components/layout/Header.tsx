@@ -14,7 +14,7 @@ const Header = () => {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border"
+      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border bg-gradient-to-br from-emerald-900 to-emerald-700"
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
