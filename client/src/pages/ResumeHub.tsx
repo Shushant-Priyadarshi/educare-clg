@@ -91,7 +91,7 @@ const ResumeHub = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-gradient-to-br from-emerald-900 to-emerald-700">
       <BackgroundShapes />
 
       <div className="relative z-10 container mx-auto px-6 pt-32 pb-20">
@@ -102,8 +102,8 @@ const ResumeHub = () => {
           className="text-center mb-12"
         >
           <div className="inline-flex items-center gap-3 mb-4">
-            <FileText className="w-12 h-12 text-primary" />
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+            <FileText className="w-12 h-12 text-primary text-yellow-300" />
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground text-yellow-300">
               Resume Hub
             </h1>
           </div>

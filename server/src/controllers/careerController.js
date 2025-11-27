@@ -68,7 +68,7 @@ The JSON must strictly follow this schema:
   "resources": {
     "Skill Name": [
       {
-        "title": "string (course/article/video title)",
+        "title": "string (docs/articles/courses)",
         "url": "string (working link)"
       }
     ]
@@ -77,7 +77,7 @@ The JSON must strictly follow this schema:
 
 Rules:
 - For each skill, give 2 to 3 learning resources.
-- Use real or realistic URLs (YouTube, Coursera, Udemy, freeCodeCamp, etc.).
+- Use real or realistic URLs 
 - DO NOT include markdown, comments, or extra text.
 Output must start with { and end with }.
 `;

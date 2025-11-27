@@ -51,7 +51,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-gradient-to-br from-emerald-900 to-emerald-700">
       <BackgroundShapes />
       
       <div className="relative z-10 container mx-auto px-6 pt-32 pb-20">
@@ -71,7 +71,7 @@ const Home = () => {
             <span className="text-sm font-medium text-primary">Welcome to Your Success Journey</span>
           </motion.div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 text-yellow-300">
             EduCareer Companion
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
